@@ -1,2 +1,2 @@
 # GraphicsDrawing
- Fractals Drawing and other Graphical projects
+Fractals Drawing and other Graphical projects
