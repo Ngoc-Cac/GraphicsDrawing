@@ -46,3 +46,27 @@ def generate_julia_set(
         gradient[~mask] += np.exp(-abs(z[~mask])) if smooth else 1
     
     return gradient
+
+
+def draw_mandel_set(
+    center: complex,
+    width: float,
+    height: float,
+    resolution: int = 512,
+    max_iter: int = 50,
+    escape_radius: int | float = 1000
+):
+    aspect_ratio = height / width
+    resolution = (np.floor(resolution * aspect_ratio).astype(np.int32), resolution)
+    if aspect_ratio > 1: resolution = resolution[::-1]
+
+    x = np.linspace(
+        center.real - width / 2, center.real + width / 2,
+        num=resolution[1]
+    )
+    y = np.linspace(
+        center.imag - height / 2, center.imag + height / 2,
+        num=resolution[0]
+    )
+    xx, yy = np.meshgrid(x, y)
+    return generate_mandelbrot_set(xx + 1j * yy, max_iter, escape_radius) / max_iter
