@@ -43,7 +43,6 @@ def generate_julia_set(
     gradient = np.exp(-abs(z)) if smooth else np.zeros(z.shape)
     while (true_iter := true_iter + 1) < max_iter and not np.all((mask := abs(z) >= escape_radius)):
         z[~mask] = z[~mask] ** power + julia_cons
-
         gradient[~mask] += np.exp(-abs(z[~mask])) if smooth else 1
     
     return gradient
