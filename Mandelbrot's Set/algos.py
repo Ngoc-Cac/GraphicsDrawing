@@ -36,7 +36,7 @@ def generate_julia_set(
     smooth: bool = True
 ) -> NDArray:
     if escape_radius is None:
-        escape_radius = abs(z.real).max() ** 2 + abs(z.imag).max(axis=1) ** 2
+        escape_radius = abs(z.real).max() ** 2 + abs(z.imag).max() ** 2
 
     z = np.array(z)
     true_iter = -1
