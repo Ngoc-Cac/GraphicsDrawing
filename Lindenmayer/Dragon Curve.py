@@ -2,12 +2,10 @@ import turtle as t
 import logging as lg
 
 def DragonCurve(initial: str) -> str:
-    initial = [char for char in initial]
-    for i, char in enumerate(initial):
-        if char == 'F':
-            initial[i] = 'F+F-F'
-
-    return ''.join(initial)
+    return ''.join([
+        'F+F-F' if char == 'F' else char
+        for char in initial
+    ])
 
 def DrawDragon(lindenmayer_str: str, turtle: t.Turtle, *, distance: float = 1) -> None:
     for char in lindenmayer_str:
