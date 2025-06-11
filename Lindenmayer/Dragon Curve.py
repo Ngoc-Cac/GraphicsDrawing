@@ -1,13 +1,17 @@
 import turtle as t
 import logging as lg
 
-def DragonCurve(initial: str) -> str:
+def dragon_curve(initial: str) -> str:
     return ''.join([
         'F+F-F' if char == 'F' else char
         for char in initial
     ])
 
-def DrawDragon(lindenmayer_str: str, turtle: t.Turtle, *, distance: float = 1) -> None:
+def draw_dragon(
+    lindenmayer_str: str,
+    turtle: t.Turtle, *,
+    distance: float = 1,
+):
     for char in lindenmayer_str:
         if char == "F":
             turtle.forward(distance)
@@ -28,13 +32,13 @@ def main():
     myTurtle.pencolor('white')
 
     initial_str: str = "F"
-    depth: int = 15
+    depth: int = 11
 
     for _ in range(depth):
-        initial_str = DragonCurve(initial_str)
+        initial_str = dragon_curve(initial_str)
 
-    t.tracer(0)
-    DrawDragon(initial_str, myTurtle, distance=2.53)
+    t.tracer(5)
+    draw_dragon(initial_str, myTurtle, distance=2.53)
 
     t.tracer(True)
     t.exitonclick()
