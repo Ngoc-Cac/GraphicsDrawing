@@ -3,12 +3,11 @@ import math
 from tqdm import tqdm
 
 
-_moving_actions = set('FG')
-
 class LSystem:
     rules=None
     turning_angle=90
     initial_state=None
+    _moving_actions=set('FG')
 
     @classmethod
     def _apply_rule(cls,
@@ -29,7 +28,7 @@ class LSystem:
     ):
         end_pos = [*start_pos]
         for action in actions:
-            if action in 'FG':
+            if action in cls._moving_actions:
                 radians = heading * math.pi / 180
                 end_pos[0] += math.cos(radians) * length
                 end_pos[1] += math.sin(radians) * length
@@ -67,7 +66,7 @@ class LSystem:
         xs, ys = [], []
         for char in state:
             residual_chars += char
-            if char in _moving_actions:
+            if char in cls._moving_actions:
                 end_pos, heading = cls._move_turtle(
                     start_pos, residual_chars,
                     heading, length=length
