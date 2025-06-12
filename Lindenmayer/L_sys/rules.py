@@ -1,13 +1,9 @@
 import math
-import matplotlib.pyplot as plt
 
 from tqdm import tqdm
 
-from matplotlib.axes import Axes
-
 
 _moving_actions = set('FG')
-
 
 class LSystem:
     rules=None
@@ -64,11 +60,8 @@ class LSystem:
         state: str,
         start_pos: tuple[int, int] = (0, 0),
         heading: float = 90,
-        length: float = 1,
-        ax: Axes | None = None
+        length: float = 1
     ):
-        if ax is None:
-            ax = plt.gca()
 
         residual_chars = ''
         xs, ys = [], []
@@ -89,8 +82,7 @@ class LSystem:
                 start_pos = end_pos
                 residual_chars = ''
 
-        ax.plot(xs, ys)
-        return ax
+        return xs, ys
 
 
 class DragonCurve(LSystem):
