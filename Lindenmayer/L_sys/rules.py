@@ -6,37 +6,29 @@ from tqdm import tqdm
 from matplotlib.axes import Axes
 
 
-_dragon_curve = {
-    'F': 'F+G',
-    'G': 'F-G'
-}
-
-_sierpinski = {
-    'F': 'F+F−F−F+F'
-}
 _moving_actions = set('FG')
 
-class L_System:
-    __slots__ = '_rules'
-    def __init__(self):
-        self._rules = {}
-        self._rules['dragon_curve'] = _dragon_curve
-        self._rules['sierpinski'] = _sierpinski
 
-    def _apply_rule(self,
-        state: str,
-        rule_name: str
+class LSystem:
+    rules=None
+    turning_angle=90
+    initial_state=None
+
+    @classmethod
+    def _apply_rule(cls,
+        state: str
     ):
-        rule_set = self._rules[rule_name]
         return ''.join([
-            rule_set[char] if char in rule_set else char
+            cls.rules[char]
+            if char in cls.rules else char
             for char in state
         ])
-    def _move_turtle(self,
+    
+    @classmethod
+    def _move_turtle(cls,
         start_pos: tuple[float, float],
         actions: str,
         heading: float,
-        turning_angle: float = 90,
         length: float = 1
     ):
         end_pos = [*start_pos]
@@ -46,23 +38,29 @@ class L_System:
                 end_pos[0] += math.cos(radians) * length
                 end_pos[1] += math.sin(radians) * length
             elif action == '+':
-                heading += turning_angle
+                heading += cls.turning_angle
             elif action == '-':
-                heading -= turning_angle
+                heading -= cls.turning_angle
             else:
                 raise ValueError(f'Unrecognised action {action}')
         return tuple(end_pos), heading
 
-    def grow(self,
-        inital_state: str,
-        rule_name: str,
+    @classmethod
+    def grow(cls,
+        initial_state: str | None = None,
         num_iters: int = 5
     ):
+        if cls.rules is None:
+            raise NotImplementedError('No rules have been set')
+        
+        if initial_state is None:
+            initial_state = cls.initial_state
         for _ in tqdm(range(num_iters)):
-            inital_state = self._apply_rule(inital_state, rule_name)
-        return inital_state
+            initial_state = cls._apply_rule(initial_state)
+        return initial_state
 
-    def plot(self,
+    @classmethod
+    def plot(cls,
         state: str,
         start_pos: tuple[int, int] = (0, 0),
         heading: float = 90,
@@ -77,7 +75,7 @@ class L_System:
         for char in state:
             residual_chars += char
             if char in _moving_actions:
-                end_pos, heading = self._move_turtle(
+                end_pos, heading = cls._move_turtle(
                     start_pos, residual_chars,
                     heading, length=length
                 )
@@ -93,3 +91,27 @@ class L_System:
 
         ax.plot(xs, ys)
         return ax
+
+
+class DragonCurve(LSystem):
+    rules = {
+        'F': 'F+G',
+        'G': 'F-G'
+    }
+    turning_angle = 90
+    initial_state = 'F'
+
+class KochCurve(LSystem):
+    rules = {
+        'F': 'F+F-F-F+F'
+    }
+    turning_angle = 90
+    initial_state = 'F'
+
+class Sierpinski(LSystem):
+    rules = {
+        'F': 'G-F-G',
+        'G': 'F+G+F'
+    }
+    turning_angle = 60
+    initial_state = 'F'
