@@ -36,6 +36,7 @@ class LSystem:
                 heading += cls.turning_angle
             elif action == '-':
                 heading -= cls.turning_angle
+            elif action == ' ': pass
             else:
                 raise ValueError(f'Unrecognised action {action}')
         return tuple(end_pos), heading
@@ -61,12 +62,12 @@ class LSystem:
         heading: float = 90,
         length: float = 1
     ):
-
-        residual_chars = ''
+        stack = []
         xs, ys = [], []
+        residual_chars = ''
         for char in state:
-            residual_chars += char
             if char in cls._moving_actions:
+                residual_chars += char
                 end_pos, heading = cls._move_turtle(
                     start_pos, residual_chars,
                     heading, length=length
@@ -80,6 +81,12 @@ class LSystem:
 
                 start_pos = end_pos
                 residual_chars = ''
+            elif char == '[':
+                stack.append((start_pos, heading))
+            elif char == ']':
+                start_pos, heading = stack.pop()
+            else:
+                residual_chars += char
 
         return xs, ys
 
@@ -90,6 +97,22 @@ class DragonCurve(LSystem):
         'G': 'F-G'
     }
     turning_angle = 90
+    initial_state = 'F'
+
+class FractalPlant(LSystem):
+    rules = {
+        ' ': 'F+[[ ]- ]-F[-F ]+ ',
+        'F': 'FF'
+    }
+    turning_angle = 25
+    initial_state = '- '
+
+class FractalTree(LSystem):
+    rules = {
+        'F': 'G[+F]-F',
+        'G': 'GG'
+    }
+    turning_angle = 45
     initial_state = 'F'
 
 class KochCurve(LSystem):
