@@ -22,21 +22,14 @@ class LSystem:
     @classmethod
     def _move_turtle(cls,
         start_pos: tuple[float, float],
-        actions: str,
         heading: float,
         length: float = 1
     ):
-        end_pos = [*start_pos]
-        for action in actions:
-            if action in cls._moving_actions:
-                radians = heading * math.pi / 180
-                end_pos[0] += math.cos(radians) * length
-                end_pos[1] += math.sin(radians) * length
-            elif action == '+':
-                heading += cls.turning_angle
-            elif action == '-':
-                heading -= cls.turning_angle
-        return tuple(end_pos), heading
+        radians = heading * math.pi / 180
+        return (
+            start_pos[0] + math.cos(radians) * length,
+            start_pos[1] + math.sin(radians) * length,
+        )
 
     @classmethod
     def grow(cls,
@@ -53,7 +46,7 @@ class LSystem:
         return initial_state
 
     @classmethod
-    def plot(cls,
+    def process_state(cls,
         state: str,
         start_pos: tuple[int, int] = (0, 0),
         heading: float = 90,
@@ -61,14 +54,9 @@ class LSystem:
     ):
         stack = []
         xs, ys = [], []
-        residual_chars = ''
-        for char in state:
-            if char in cls._moving_actions:
-                residual_chars += char
-                end_pos, heading = cls._move_turtle(
-                    start_pos, residual_chars,
-                    heading, length=length
-                )
+        for action in state:
+            if action in cls._moving_actions:
+                end_pos = cls._move_turtle(start_pos, heading, length)
                 xs.append(start_pos[0])
                 xs.append(end_pos[0])
                 xs.append(None)
@@ -77,13 +65,14 @@ class LSystem:
                 ys.append(None)
 
                 start_pos = end_pos
-                residual_chars = ''
-            elif char == '[':
+            elif action == '+':
+                heading += cls.turning_angle
+            elif action == '-':
+                heading -= cls.turning_angle
+            elif action == '[':
                 stack.append((start_pos, heading))
-            elif char == ']':
+            elif action == ']':
                 start_pos, heading = stack.pop()
-            else:
-                residual_chars += char
 
         return xs, ys
 
