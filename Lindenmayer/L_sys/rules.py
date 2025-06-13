@@ -99,11 +99,18 @@ class DragonCurve(LSystem):
 
 class FractalPlant(LSystem):
     rules = {
-        ' ': 'F+[[ ]- ]-F[-F ]+ ',
-        'F': 'FF'
+        'F': 'FF',
+        '_': 'F+[[_]-_]-F[-F_]+_'
     }
     turning_angle = 25
-    initial_state = '- '
+    initial_state = '-_'
+
+class FractalBush(LSystem):
+    rules = {
+        'F': 'F[+FF][-FF]F[-F][+F]F'
+    }
+    turning_angle = 36
+    initial_state = 'F'
 
 class FractalTree(LSystem):
     rules = {
@@ -112,6 +119,14 @@ class FractalTree(LSystem):
     }
     turning_angle = 45
     initial_state = 'F'
+
+
+class LevyCurve(LSystem):
+    rules = {
+        'F': '-F++F-'
+    }
+    turning_angle = 45
+    initial_state = 'F++F++F++F'
 
 
 class KochCurve(LSystem):
