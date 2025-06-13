@@ -66,19 +66,14 @@ class LSystem:
                 ys.append(None)
 
                 start_pos = end_pos
-            elif action == '+':
-                heading += cls.turning_angle
-            elif action == '-':
-                heading -= cls.turning_angle
-            elif action == '<':
-                length *= cls.shrink_factor
-            elif action == '>':
-                length /= cls.shrink_factor
+            elif action == '+': heading += cls.turning_angle
+            elif action == '-': heading -= cls.turning_angle
+            elif action == '*': length  *= cls.shrink_factor
+            elif action == '/': length  /= cls.shrink_factor
             elif action == '[':
                 stack.append((start_pos, heading))
             elif action == ']':
                 start_pos, heading = stack.pop()
-
         return xs, ys
 
 
