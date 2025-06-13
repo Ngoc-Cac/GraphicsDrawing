@@ -99,6 +99,7 @@ class DragonCurve(LSystem):
     turning_angle = 90
     initial_state = 'F'
 
+
 class FractalPlant(LSystem):
     rules = {
         ' ': 'F+[[ ]- ]-F[-F ]+ ',
@@ -115,12 +116,17 @@ class FractalTree(LSystem):
     turning_angle = 45
     initial_state = 'F'
 
+
 class KochCurve(LSystem):
     rules = {
-        'F': 'F+F-F-F+F'
+        'F': 'F-F++F-F'
     }
-    turning_angle = 90
+    turning_angle = 60
     initial_state = 'F'
+
+class KochSnowflake(KochCurve):
+    initial_state = 'F++F++F'
+
 
 class Sierpinski(LSystem):
     rules = {
