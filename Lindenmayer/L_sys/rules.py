@@ -7,6 +7,7 @@ class LSystem:
     rules=None
     turning_angle=90
     initial_state=None
+    shrink_factor=1
     _moving_actions=set('FG')
 
     @classmethod
@@ -69,6 +70,10 @@ class LSystem:
                 heading += cls.turning_angle
             elif action == '-':
                 heading -= cls.turning_angle
+            elif action == '<':
+                length *= cls.shrink_factor
+            elif action == '>':
+                length /= cls.shrink_factor
             elif action == '[':
                 stack.append((start_pos, heading))
             elif action == ']':
