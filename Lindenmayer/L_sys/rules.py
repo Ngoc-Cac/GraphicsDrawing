@@ -36,9 +36,6 @@ class LSystem:
                 heading += cls.turning_angle
             elif action == '-':
                 heading -= cls.turning_angle
-            elif action == ' ': pass
-            else:
-                raise ValueError(f'Unrecognised action {action}')
         return tuple(end_pos), heading
 
     @classmethod
