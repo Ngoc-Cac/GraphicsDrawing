@@ -1,0 +1,5 @@
+# for plotting line segments
+matplotlib[security]
+
+# alternative
+pillow[security]
