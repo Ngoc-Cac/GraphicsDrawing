@@ -2,61 +2,85 @@ from L_sys.base import LSystem
 
 
 class DragonCurve(LSystem):
-    rules = {
-        'F': 'F+G',
-        'G': 'F-G'
-    }
-    turning_angle = 90
-    initial_state = 'F'
+    def __init__(self,
+        initial_state = 'F',
+        turning_angle: int | float = 90,
+    ):
+        rules = {
+            'F': 'F+G',
+            'G': 'F-G'
+        }
+        super().__init__(rules, initial_state, turning_angle)
 
 
 class FractalPlant(LSystem):
-    rules = {
-        'F': 'FF',
-        '_': 'F+[[_]-_]-F[-F_]+_'
-    }
-    turning_angle = 25
-    initial_state = '-_'
+    def __init__(self,
+        initial_state = '-_',
+        turning_angle: int | float = 25
+    ):
+        rules = {
+            'F': 'FF',
+            '_': 'F+[[_]-_]-F[-F_]+_'
+        }
+        super().__init__(rules, initial_state, turning_angle)
 
 class FractalBush(LSystem):
-    rules = {
-        'F': 'F[+FF][-FF]F[-F][+F]F'
-    }
-    turning_angle = 36
-    initial_state = 'F'
+    def __init__(self,
+        initial_state = 'F',
+        turning_angle: int | float = 36
+    ):
+        rules = {
+            'F': 'F[+FF][-FF]F[-F][+F]F'
+        }
+        super().__init__(rules, initial_state, turning_angle)
 
 class FractalTree(LSystem):
-    rules = {
-        'F': 'G[+F]-F',
-        'G': 'GG'
-    }
-    turning_angle = 45
-    initial_state = 'F'
+    def __init__(self,
+        initial_state = 'F',
+        turning_angle: int | float = 45
+    ):
+        rules = {
+            'F': 'G[+F]-F',
+            'G': 'GG'
+        }
+        super().__init__(rules, initial_state, turning_angle)
 
 
 class LevyCurve(LSystem):
-    rules = {
-        'F': '-F++F-'
-    }
-    turning_angle = 45
-    initial_state = 'F++F++F++F'
-
+    def __init__(self,
+        initial_state = 'F++F++F++F',
+        turning_angle: int | float = 45
+    ):
+        rules = {
+            'F': '-F++F-'
+        }
+        super().__init__(rules, initial_state, turning_angle)
 
 class KochCurve(LSystem):
-    rules = {
-        'F': 'F-F++F-F'
-    }
-    turning_angle = 60
-    initial_state = 'F'
+    def __init__(self,
+        initial_state = 'F',
+        turning_angle = 60
+    ):
+        rules = {
+            'F': 'F-F++F-F'
+        }
+        super().__init__(rules, initial_state, turning_angle)
 
 class KochSnowflake(KochCurve):
-    initial_state = 'F++F++F'
+    def __init__(self,
+        initial_state = 'F++F++F',
+        turning_angle=60
+    ):
+        super().__init__(initial_state, turning_angle)
 
 
 class Sierpinski(LSystem):
-    rules = {
-        'F': 'G-F-G',
-        'G': 'F+G+F'
-    }
-    turning_angle = 60
-    initial_state = 'F'
+    def __init__(self,
+        initial_state = 'F',
+        turning_angle = 60
+    ):
+        rules = {
+            'F': 'G-F-G',
+            'G': 'F+G+F'
+        }
+        super().__init__(rules, initial_state, turning_angle)
