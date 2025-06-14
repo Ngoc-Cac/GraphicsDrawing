@@ -64,8 +64,8 @@ class LSystem:
 
     def _apply_rule(self, state: str):
         return ''.join([
-            self.rules[char]
-            if char in self.rules else char
+            self._rules[char]
+            if char in self._rules else char
             for char in state
         ])
 
@@ -78,7 +78,7 @@ class LSystem:
             raise NotImplementedError('No rules have been set')
         
         if initial_state is None:
-            initial_state = self.initial_state
+            initial_state = self._initial_state
         for _ in tqdm(range(num_iters)):
             initial_state = self._apply_rule(initial_state)
         return initial_state
@@ -102,10 +102,10 @@ class LSystem:
                 ys.append(None)
 
                 start_pos = end_pos
-            elif action == '+': heading += self.turning_angle
-            elif action == '-': heading -= self.turning_angle
-            elif action == '*': length  *= self.shrink_factor
-            elif action == '/': length  /= self.shrink_factor
+            elif action == '+': heading += self._turning_angle
+            elif action == '-': heading -= self._turning_angle
+            elif action == '*': length  *= self._shrink_factor
+            elif action == '/': length  /= self._shrink_factor
             elif action == '[':
                 stack.append((start_pos, heading))
             elif action == ']':
