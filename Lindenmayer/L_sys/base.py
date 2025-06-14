@@ -26,10 +26,10 @@ class LSystem:
         heading: float,
         length: float = 1
     ):
-        radians = heading * math.pi / 180
+        radians = math.radians(heading)
         return (
-            start_pos[0] + math.cos(radians) * length,
-            start_pos[1] + math.sin(radians) * length,
+            round(start_pos[0] + math.cos(radians) * length, 10),
+            round(start_pos[1] + math.sin(radians) * length, 10),
         )
 
     @classmethod
