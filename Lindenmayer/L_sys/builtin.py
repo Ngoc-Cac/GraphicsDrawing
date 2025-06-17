@@ -65,6 +65,14 @@ class KochCurve(LSystem):
             'F': 'F-F++F-F'
         }
         super().__init__(rules, initial_state, turning_angle)
+    
+    def process_state(self,
+        state: str,
+        start_pos: tuple[int | float, int | float] = (0, 0),
+        heading: int | float = 180,
+        length: int | float = 1
+    ):
+        return super().process_state(state, start_pos, heading, length)
 
 class KochSnowflake(KochCurve):
     def __init__(self,
@@ -84,3 +92,11 @@ class Sierpinski(LSystem):
             'G': 'F+G+F'
         }
         super().__init__(rules, initial_state, turning_angle)
+
+    def process_state(self,
+        state: str,
+        start_pos: tuple[int | float, int | float] = (0, 0),
+        heading: int | float = 0,
+        length: int | float = 1
+    ):
+        return super().process_state(state, start_pos, heading, length)
