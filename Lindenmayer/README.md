@@ -2,6 +2,12 @@
 
 [L-System](https://en.wikipedia.org/wiki/L-system) is a system consisting of an alphabet following a set of grammars and an axiom. The system can demonstrates growth through a process of substituting certain symbol in the alphabet with a sequence of symbols from the same alphabet.
 
+### Table of Contents
+- [Example](#example)
+- [Quickstart](#quickstart)
+- [L_sys](#l_sys)
+- [Gallery](#gallery)
+
 ## Example
 For example, we can consider the L-system that draws a [Dragon Curve](https://en.wikipedia.org/wiki/Dragon_curve):
 - **Alphabet**: `['F', 'G', '+', '-']`
