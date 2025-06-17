@@ -2,16 +2,20 @@
 This repo is meant for graphical projects that are too small to belong to a single repo.
 
 ## Lindenmayer's System
-<div>
-    <img src="./Lindenmayer/assets/fractal_plant.gif" width=256>
-    <img src="./Lindenmayer/assets/fractal_tree.gif" width=256>
-</div>
-
-<div>
-    <img src="./Lindenmayer/assets/koch_snowflake.gif" width=256>
-    <img src="./Lindenmayer/assets/levy_curve.gif" width=256>
-</div>
-
-<img src="./Lindenmayer/assets/sierpinski.gif" width=512>
+<table cellspacing="0">
+    <tbody>
+        <tr>
+            <td><img src="./Lindenmayer/assets/fractal_plant.gif" width=200></td>
+            <td><img src="./Lindenmayer/assets/fractal_tree.gif" width=200></td>
+            <td rowspan=2>
+                <img src="./Lindenmayer/assets/sierpinski.gif" width=400>
+            </td>
+        </tr>
+        <tr>
+            <td><img src="./Lindenmayer/assets/koch_snowflake.gif" width=200></td>
+            <td><img src="./Lindenmayer/assets/levy_curve.gif" width=200></td>
+        </tr>
+    </tbody>
+</table>
 
 Visit [README.md](./Lindenmayer/README.md) for more information.
