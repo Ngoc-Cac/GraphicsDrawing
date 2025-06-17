@@ -95,7 +95,7 @@ plt.show()
 
 ## Gallery
 <details>
-    <summar>
+    <summary>
         &#128009;<b>Dragon curve</b>
     </summary>
     <br>
@@ -103,7 +103,7 @@ plt.show()
 </details>
 
 <details>
-    <summar>
+    <summary>
         &#127807;<b>Fractal Tree and Fractal Plant</b>
     </summary>
     <br>
@@ -112,8 +112,8 @@ plt.show()
 </details>
 
 <details>
-    <summar>
-        &#10054;<b>Levy's and Koch's Curve</b>
+    <summary>
+        &#10054;<b> Levy's and Koch's Curve</b>
     </summary>
     <br>
     <img src="./assets/levy_curve.gif" width=256>
@@ -121,8 +121,8 @@ plt.show()
 </details>
 
 <details>
-    <summar>
-        <b>Sierpinski's Triangle</b>
+    <summary>
+        &#9650;<b> Sierpinski's Triangle</b>
     </summary>
     <br>
     <img src="./assets/sierpinski.gif" width=512>
