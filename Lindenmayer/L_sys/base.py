@@ -85,9 +85,9 @@ class LSystem:
 
     def process_state(self,
         state: str,
-        start_pos: tuple[int, int] = (0, 0),
-        heading: float = 90,
-        length: float = 1
+        start_pos: tuple[int | float, int | float] = (0, 0),
+        heading: int | float = 90,
+        length: int | float = 1
     ):
         stack = []
         xs, ys = [], []
